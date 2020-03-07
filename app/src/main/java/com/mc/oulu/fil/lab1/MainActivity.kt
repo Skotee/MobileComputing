@@ -1,12 +1,8 @@
 package com.mc.oulu.fil.lab1
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
@@ -62,13 +58,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-    fun setAlarm(time:Long, text:String){
-        val intent = Intent(this,ReminderReceiver::class.java )
-        intent.putExtra("text", text)
-        val pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT)
-        val manager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        manager.setExact(AlarmManager.RTC, time, pendingIntent)
     }
 }
 
