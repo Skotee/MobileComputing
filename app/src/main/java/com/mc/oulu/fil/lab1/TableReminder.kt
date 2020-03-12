@@ -3,7 +3,7 @@ import androidx.room.*
 @Entity(tableName = "reminders")
 data class Reminder(
         @PrimaryKey(autoGenerate = true) var uid:Int?,
-        @ColumnInfo(name = "time") var time:Long?,
+        @ColumnInfo(name="time") var time:Long?,
         @ColumnInfo(name="location") var location:String?,
         @ColumnInfo(name="message") var message:String
 ){
@@ -12,8 +12,11 @@ data class Reminder(
 @Dao
 interface ReminderDAO{
     @Transaction @Insert
-    fun insert(r:Reminder)
+    fun insert(r:Reminder): Long
 
-    @Query("SELECT * from reminders")
+    @Query("DELETE FROM reminders WHERE uid = id")
+    fun delete(id: Int)
+
+    @Query("SELECT * FROM reminders")
     fun getAll():List<Reminder>
 }

@@ -20,13 +20,13 @@ class TimeActivity : AppCompatActivity() {
         datePicker.minDate=Calendar.getInstance().timeInMillis;
         button.setOnClickListener{
 
-            val calednra = GregorianCalendar(datePicker.year,
+            val calendar = GregorianCalendar(datePicker.year,
                     datePicker.month,
                     datePicker.dayOfMonth,timePicker.currentHour, timePicker.currentMinute)
-            if (calednra.timeInMillis > System.currentTimeMillis()) {
+            if (calendar.timeInMillis > System.currentTimeMillis()) {
                 val reminder = Reminder(
                         null,
-                        calednra.timeInMillis,
+                        calendar.timeInMillis,
                         null,
                         editText.text.toString()
                 )

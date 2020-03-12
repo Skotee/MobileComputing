@@ -7,7 +7,7 @@ import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.list_view_item.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.zip.Inflater
+
 /**
  * Created by Radek on 25.02.2020.
  */
@@ -17,14 +17,20 @@ class ReminderAdapter(private val context: Context, private val list:List<Remind
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val row = inflater.inflate(R.layout.list_view_item, parent, false)
         row.textMessage.text=list[position].message
-        list[position]?.let {
+        if (list[position].time != null)
+        {
             val d = SimpleDateFormat("HH:mm dd.MM.yyyy")
             d.timeZone = TimeZone.getDefault()
+
+            val time = list[position].time
+            val date = d.format(time)
+            row.itemTrigger.text = date
             val readableTime = d.format(it.time)
             row.textStatus.text = readableTime
+        } else if (list[position].location != null) {
+            row.itemTrigger.text=list[position].location
         }
-        //row.textStatus.text=list[position].time.toString()
-        return row;
+        return row
     }
 
     override fun getItem(position: Int): Any {
